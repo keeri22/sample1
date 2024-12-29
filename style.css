@@ -1,0 +1,79 @@
+body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-image: url('bgimage.jpeg'); /* Replace with your image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: black;
+            text-align: center;
+            padding: 50px;
+        }
+        .bal{
+            background-color: pink;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+            height: 100px;
+            text-align: center;
+            margin: auto;
+        }
+        .container {
+            background-color: purple;
+            padding: 20px;
+            width: 900px;
+            height:fit-content;
+            border-radius: 10px;
+            border-color: grey;
+            display: inline-block;
+        }
+        table {
+            color: white;
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        tr {
+            background-color: white;
+        }
+        th {
+            background-color: palevioletred;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid white;
+            color: blanchedalmond;
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid black;
+            color: black;
+        }
+        .add-form {
+            margin-top: 20px;
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: black;
+        }
+        .blue-button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: indianred;
+            border-color: brown;
+        }
+        .custom-textbox {
+            background-color: orchid;
+            border:2px solid orchid;
+            border-radius: 5px;
+            padding:5px;
+            font-size: 16px;
+        }
+        .custom-textbox, focus {
+            background-color: orchid;
+            border-color: blueviolet;
+            outline:none;
+        }

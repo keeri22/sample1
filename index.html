@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intercollegiate Competition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bal">
+    <h1>Total Participants Fees</h1>
+        <h2 id="tot">0</h2>
+</div>
+        <p>Quiz Participants Fees: <span id="quiz-partz">0</span></p>
+        <p>Presentation Participants Fees: <span id="present-partz">0</span></p>
+    <div class="container">
+        <h3>REGISTRATION</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>S.NO</th>
+                    <th>Participant</th>
+                    <th>Registration Fees</th>
+                    <th>Event</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="registration-table"></tbody>
+        </table>
+    </div>
+        <div class="add-form">
+            <h3>NEW PARTICIPANTS DETAILS</h3>
+            <label for="event-type">Event Type:</label>
+            <select id="event-type" class="custom-textbox">
+                <option value="select">-SELECT-</option>
+                <option value="quiz">Quiz</option>
+                <option value="presentation">Presentation</option>
+            </select>
+            <br><br>
+            <label for="name">Participant:</label> 
+            <input type="text" id="name" placeholder="Name" class="custom-textbox">
+            <br><br>
+            <label for="amount">Registration Fees:</label>
+            <input type="number" id="amount" placeholder="Amount" class="custom-textbox">
+            <br><br>
+            <button class="blue-button" onclick="addEntry()">UPDATE</button>
+        </div>
+</body>
+    <script>
+        let tot = 0;
+        let totalQuiz = 0;
+        let totalPresentation = 0;
+        let entries = [];
+        const totEl = document.getElementById('tot');
+        const totalQuizEl = document.getElementById('quiz-partz');
+        const totalPresentationEl = document.getElementById('present-partz');
+        const registrationTable = document.getElementById('registration-table');
+
+        function updateUI() {
+    // Update total values
+    totEl.textContent = tot;
+    totalQuizEl.textContent = totalQuiz;
+    totalPresentationEl.textContent = totalPresentation;
+
+    // Clear the registration table
+    registrationTable.innerHTML = "";
+
+    // Re-render the table
+    entries.forEach((entry, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${entry.name}</td>
+            <td>${entry.amount}</td>
+            <td>${entry.type}</td>
+            <td><button onclick="deleteEntry(${index})"><span style="color:red;">🗑️</span></button></td>
+        `;
+        registrationTable.appendChild(row);
+    });
+}
+        function addEntry() {
+            const eventType = document.getElementById('event-type').value;
+            const name = document.getElementById('name').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+
+            if(name<=0)
+            {
+                alert('Please enter your name!');
+                return;
+            }
+            if (!name || amount <= 0 || isNaN(amount)) {
+                alert('Please enter valid data');
+                return;
+            }
+            const entry = { name, amount, type: eventType };
+            entries.push(entry);
+            if (eventType === 'quiz') {
+                totalQuiz += amount;
+                tot += amount;
+            } else {
+                totalPresentation += amount;
+                tot += amount;
+            }
+            updateUI();
+            document.getElementById('event-type').value="";
+            document.getElementById('name').value="";
+            document.getElementById('amount').value="";
+        }
+
+        function deleteEntry(index) {
+    const entry = entries[index];
+
+    // Adjust totals based on entry type
+    if (entry.type === "quiz") {
+        totalQuiz -= entry.amount;
+    } else if (entry.type === "presentation") {
+        totalPresentation -= entry.amount;
+    }
+    tot -= entry.amount;
+
+    // Remove the entry from the array
+    entries.splice(index, 1);
+
+    // Update the UI with the recalculated values
+    updateUI();
+}
+</script>
+</html>
